@@ -3,19 +3,32 @@
 (function() {
 	'use strict';
 	var app = {
-		data: [{name: 'name 1', category: 'game'},{name: 'name 2', category: 'web'},{name: 'name 3', category: 'web'}],
+		data: [],
 		init: function() {
 			this.dom();
 			this.bindEvents();
 			this.render();
 		},
+
 		bindEvents: function() {
 			this.btn.on('click', this.add.bind(this));
 			this.table.delegate('i.del','click', function() {
-				// your code here
+				var a = this.getAttribute('data-id');
+				app.data.splice(a, 1);
+
+				$('.del').parent().remove();
+
+				app.data.forEach(function(i, index) {
+				console.log(i);
+				console.log(index);
+				$('<li ><section>'+i.name+'</section><span>'+i.category+'</span><i class="del" data-id="' + index + '"><div>X</div></i></li>').appendTo('#table-result');
+			});
+
+
 			});
 		},
 
+ 
 		dom: function() {
 			this.main = $('#main-input');
 			this.table = $('#table-result');
@@ -45,12 +58,14 @@
 			this.total.text(this.data.length);
 
 			// loop data and append to table-result
-			this.data.forEach(function(i) {
-				$('<li><section>'+i.name+'</section><span>'+i.category+'</span><i class="del"><div>X</div></i></li>').appendTo(table);
+			this.data.forEach(function(i, index) {
+				console.log(i);
+				console.log(index);
+				$('<li ><section>'+i.name+'</section><span>'+i.category+'</span><i class="del" data-id="' + index + '"><div>X</div></i></li>').appendTo(table);
 			});
 		},
 		add: function() {
-			var data = this.getValues();
+			var data = this.getValue();
 			// validation if data value are not false
 			if(data.name !== false && data.category !== false) {
 				this.data.push(data);

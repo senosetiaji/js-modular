@@ -26,11 +26,11 @@
     }
     for (var i in countData) {
       if (countData.hasOwnProperty(i)) {
-				var percentage = parseInt(countData[i])/total*100;
-				$('<li style="width:'+percentage+'%">\
-						<div>'+parseInt(percentage)+'%</div>\
-						<div class="name">'+i+'</div>\
-					</li>').appendTo(el);
+			var percentage = parseInt(countData[i])/total*100;
+			$('<li style="width:'+percentage+'%">\
+					<div>'+parseInt(percentage)+'%</div>\
+					<div class="name">'+i+'</div>\
+				</li>').appendTo(el);
       }
     }
     
